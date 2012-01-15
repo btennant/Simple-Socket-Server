@@ -24,33 +24,33 @@ var server = net.createServer(function(socket) {
     socket.setKeepAlive(true, 2000);
 
     socket.on('connect', function() {
-        console.log('Socket connect');
+        console.log(socket.remoteAddress + ' Socket connect');
         logString(socket.remoteAddress + ' Socket connect');
     })
 
     socket.on('data', function(data) {
-        console.log(data);
+        //console.log(data);
         logString(socket.remoteAddress + ' Socket received: ' + data);
     })
     
     socket.on('end', function() {
-        console.log('Socket end');
+        //console.log('Socket end');
         logString('Socket end');
         removeSocketFromList(socket);
     })
     
     socket.on('timeout', function() {
-        console.log('Socket timeout');
+        //console.log('Socket timeout');
         logString('Socket timeout');
     })
 
     socket.on('drain', function() {
-        console.log('Socket drain');
+        //console.log('Socket drain');
         logString('Socket drain');
     })
 
     socket.on('error', function(exception) {
-        console.log('Socket error' + exception);
+        //console.log('Socket error' + exception);
         logString('Socket error' + exception);
     })
 
@@ -78,7 +78,7 @@ function pingOpenConnections()
 
 function writePingToSocket(socket) 
 {
-    console.log('writePingToSocket ' + pingCounter);
+    //console.log('writePingToSocket ' + pingCounter);
     socket.write(new Date() + '\t' + pingCounter + '\n\0');
     logString(''+ pingCounter + '');
     pingCounter++;
@@ -96,7 +96,7 @@ function removeSocketFromList(socket)
 
 function clearPingCounter()
 {
-    console.log('clearPingCounter');
+    //console.log('clearPingCounter');
     clearInterval(pingIntervalId);
     pingCounter = 1;
 }
